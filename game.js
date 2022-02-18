@@ -69,5 +69,36 @@ function game() {
     }
 }
 
-game();
+const buttons = document.querySelectorAll('button');
+let results = document.querySelector('#results');
+let playerScore = document.querySelector('#playerScore');
+let computerScore = document.querySelector('#computerScore');
 
+let playerScoreVariable = 0;
+let computerScoreVariable =0;
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        let playerSelection = button.textContent.toLowerCase();
+        console.log(typeof playerSelection);
+        console.log(playerSelection);
+        let computerSelection = computerPlay();
+        console.log(typeof computerSelection);
+        console.log(computerSelection);
+        let result = playRound(playerSelection, computerSelection);
+        results.textContent = result;
+        if (result.charAt(0) === 'W') {
+            ++ playerScoreVariable;
+        } else if (result.charAt(0) === 'L') {
+            ++ computerScoreVariable;
+        }
+        playerScore.textContent = playerScoreVariable.toString();
+        computerScore.textContent = computerScoreVariable.toString();
+        if (playerScoreVariable === 5) {
+            results.textContent = 'Player is the winner';
+        } else if (computerScoreVariable === 5) {
+            results.textContent = 'Computer is the winner';
+        }
+    })
+    
+})
